@@ -5,32 +5,52 @@ local opts = { noremap = true, silent = true }
 
 -- [[ Basic Keymaps ]]
 -- Management
+keymap.set("i", "jj", "<Esc>")
+keymap.set("i", "<C-w>", "<C-o>w")
+keymap.set("i", "<C-b>", "<C-o>b")
+keymap.set("i", "<C-e>", "<C-o>e")
+keymap.set("i", "<C-l>", "<C-o>l")
+keymap.set("i", "<C-h>", "<C-o>h")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("n", "<leader>m", ":Mason<Return>")
 keymap.set("n", "<leader>l", ":Lazy<Return>")
 keymap.set("n", "<leader>n", ":Noice<Return>")
+
 -- Comments
 api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
 api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
 api.nvim_set_keymap("x", "<C-_>", "gcc<C-c>", { noremap = false })
+
+-- vim-go
+----GoAddTags: JSON
+keymap.set("n", "<Leader>gat", ":GoAddTags<Return>")
+
+-- Macros
+keymap.set("n", "Q", "@qj")
+keymap.set("x", "Q", ":norm @q<Return>")
 -- [[ end Basic ]]
 
--- [[ Kickstart.nvim Keymaps ]]
+-- [[ Kickstart.nvim keymaps ]]
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- See `:help keymap.set()`
+keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 -- [[ end Kickstart.nvim ]]
 
 -- [[ Remap from devaslife ]]
+-- throw away x delete
+keymap.set("n", "x", '"_x')
+
 -- increament and decreament digits
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")

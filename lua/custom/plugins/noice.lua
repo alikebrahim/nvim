@@ -34,12 +34,12 @@ return {
                 size = { max_width = 80 },
             },
         },
-        -- routes = {
-        --     {
-        --         view = "notify",
-        --         filter = { event = "msg_showmode" },
-        --     },
-        -- },
+        routes = { -- Shows macro 'recording @' message (also --MODE-- messages)
+            {
+                view = "cmdline",
+                filter = { event = "msg_showmode" },
+            },
+        },
     },
     dependencies = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
