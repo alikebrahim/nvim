@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+vim.g.netrw_banner = 0
 -- See `:help vim.o`
 --
 -- Tab / Indentation

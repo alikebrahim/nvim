@@ -1,34 +1,44 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 local keymap = vim.keymap
 local api = vim.api
 local opts = { noremap = true, silent = true }
 
-
 -- [[ Basic Keymaps ]]
--- Management
-keymap.set("i", "jj", "<Esc>")
-keymap.set("i", "<C-w>", "<C-o>w")
-keymap.set("i", "<C-b>", "<C-o>b")
-keymap.set("i", "<C-e>", "<C-o>e")
-keymap.set("i", "<C-l>", "<C-o>l")
-keymap.set("i", "<C-h>", "<C-o>h")
+-- Easier escape to normal mode from insert mode
+-- keymap.set("i", "jj", "<Esc>")
+
+-- Move lines in visual mode
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+
+-- Plugin UIs
 keymap.set("n", "<leader>m", ":Mason<Return>")
 keymap.set("n", "<leader>l", ":Lazy<Return>")
 keymap.set("n", "<leader>n", ":Noice<Return>")
+
+-- Telescope undo tree
+keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- Comments
 api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
 api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
 api.nvim_set_keymap("x", "<C-_>", "gcc<C-c>", { noremap = false })
 
--- vim-go
-----GoAddTags: JSON
-keymap.set("n", "<Leader>gat", ":GoAddTags<Return>")
-
 -- Macros
 keymap.set("n", "Q", "@qj")
 keymap.set("x", "Q", ":norm @q<Return>")
+
+-- Tab control
+keymap.set("n", "<tab><tab>", ":tabedit<Return>", opts)
+keymap.set("n", "<tab>", ":tabnext<Return>", opts)
+keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
+keymap.set("n", "<Leader><tab>", ":tab split<Return>", opts)
+
+-- vim-go
+----GoAddTags: JSON
+keymap.set("n", "<Leader>gat", ":GoAddTags<Return>")
 -- [[ end Basic ]]
 
 -- [[ Kickstart.nvim keymaps ]]
@@ -58,10 +68,6 @@ keymap.set("n", "-", "<C-x>")
 -- select all document
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
--- New tab
-keymap.set("n", "<tab><tab>", ":tabedit<Return>", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 
 -- Split Window
 keymap.set("n", "ss", ":split<Return>", opts)
@@ -82,7 +88,7 @@ keymap.set("n", "<C-w>k", "<C-w>+", opts)
 
 -- [[ Remap from thePrimagen ]]
 -- netrw
-keymap.set("n", "<leader>pv", vim.cmd.Ex)
+keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "netrw" })
 
 -- Move up and down with cursor at the center of the buffer
 api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
